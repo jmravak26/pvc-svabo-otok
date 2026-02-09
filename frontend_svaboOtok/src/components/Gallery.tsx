@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { GALLERY_IMAGES } from '../config/images';
 
 interface GalleryProps {
   lang: 'hr' | 'en';
@@ -12,7 +13,7 @@ const translations = {
 function Gallery({ lang }: GalleryProps) {
   const navigate = useNavigate();
   const t = translations[lang];
-  const images = Array.from({ length: 6 }, (_, i) => `/images/galleryImages/gallery-${i + 1}.jpg`);
+  const images = GALLERY_IMAGES.slice(0, 6);
 
   return (
     <section id="gallery" className="py-20 px-5 max-w-7xl mx-auto">

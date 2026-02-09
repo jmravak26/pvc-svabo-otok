@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { GALLERY_IMAGES } from '../config/images';
 
 interface GalleryPageProps {
   lang: 'hr' | 'en';
@@ -29,7 +30,6 @@ const translations = {
   }
 };
 
-const ALL_IMAGES = Array.from({ length: 150 }, (_, i) => `/images/galleryImages/gallery-${i + 1}.jpg`);
 const IMAGES_PER_PAGE = 50;
 const LOAD_INCREMENT = 6;
 
@@ -39,11 +39,11 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
   const t = translations[lang];
   
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
-  const totalPages = Math.ceil(ALL_IMAGES.length / IMAGES_PER_PAGE);
+  const totalPages = Math.ceil(GALLERY_IMAGES.length / IMAGES_PER_PAGE);
   const [displayCount, setDisplayCount] = useState(LOAD_INCREMENT);
 
   const randomizedImages = useMemo(() => {
-    return [...ALL_IMAGES].sort(() => Math.random() - 0.5);
+    return [...GALLERY_IMAGES].sort(() => Math.random() - 0.5);
   }, []);
 
   const startIndex = (currentPage - 1) * IMAGES_PER_PAGE;
