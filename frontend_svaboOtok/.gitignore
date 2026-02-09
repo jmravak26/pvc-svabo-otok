@@ -34,3 +34,8 @@ dist-ssr
 
 # TypeScript
 *.tsbuildinfo
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
