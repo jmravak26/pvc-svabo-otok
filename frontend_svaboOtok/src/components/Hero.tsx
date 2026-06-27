@@ -36,7 +36,7 @@ function Hero({ lang }: HeroProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % t.slides.length);
-    }, 5000);
+    }, 9000);
     return () => clearInterval(timer);
   }, [t.slides.length]);
 
@@ -49,19 +49,23 @@ function Hero({ lang }: HeroProps) {
   };
 
   return (
-    <section className="relative h-150 max-md:h-96 overflow-hidden">
+    <section className="relative w-full aspect-video max-md:aspect-4/3 overflow-hidden">
       {t.slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-gray-500 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ backgroundImage: `url(${HERO_IMAGES[index]})` }}
         >
-          <div className="absolute inset-0 bg-linear-to-br from-black/70 to-black/30 flex flex-col justify-center items-center text-white text-center px-5">
-            <h1 className="text-5xl max-md:text-3xl font-bold mb-3 text-yellow drop-shadow-lg">{t.title}</h1>
-            <h2 className="text-3xl max-md:text-2xl font-bold mb-3 drop-shadow-lg">{slide.title}</h2>
-            <p className="text-xl max-md:text-base drop-shadow-md">{slide.subtitle}</p>
+          <img
+            src={HERO_IMAGES[index]}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 md:via-black/10 to-transparent flex flex-col justify-end items-center md:items-start px-8 md:px-14 pb-16 md:pb-12 text-white text-center md:text-left">
+            <p className="text-yellow font-semibold text-sm md:text-base uppercase tracking-widest mb-2 drop-shadow">{t.title}</p>
+            <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg leading-tight">{slide.title}</h2>
+            <p className="text-base md:text-lg text-white/80 mt-2 drop-shadow">{slide.subtitle}</p>
           </div>
         </div>
       ))}
@@ -80,7 +84,7 @@ function Hero({ lang }: HeroProps) {
         <ChevronRight className="w-8 h-8" />
       </button>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      <div className="absolute bottom-5 right-6 flex gap-3 z-10">
         {t.slides.map((_, index) => (
           <button
             key={index}

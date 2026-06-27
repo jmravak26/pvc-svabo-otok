@@ -27,16 +27,22 @@ function About({ lang }: AboutProps) {
   const t = translations[lang];
 
   return (
-    <section id="about" className="py-20 px-5 max-w-7xl mx-auto bg-gray-50">
-      <h2 className="text-4xl font-bold text-center mb-5">{t.title}</h2>
-      <p className="text-center max-w-3xl mx-auto mb-12 text-lg text-gray-600">{t.text}</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-        {t.features.map((feature, index) => (
-          <div key={index} className="bg-white p-8 rounded-lg text-center shadow-md hover:-translate-y-1 hover:shadow-xl transition-all">
-            <h3 className="text-yellow text-2xl font-bold mb-3">{feature.title}</h3>
-            <p className="text-gray-600">{feature.desc}</p>
-          </div>
-        ))}
+    <section id="about" className="py-24 bg-black text-white">
+      <div className="px-5 max-w-7xl mx-auto">
+        <div className="flex items-center gap-4 mb-6">
+          <span className="w-12 h-1 bg-yellow rounded-full" />
+          <h2 className="text-4xl font-bold">{t.title}</h2>
+        </div>
+        <p className="max-w-2xl mb-16 text-lg text-gray-400">{t.text}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {t.features.map((feature, index) => (
+            <div key={index} className="border border-gray-800 rounded-2xl p-8 hover:border-yellow transition-colors duration-300">
+              <span className="text-yellow text-4xl font-black mb-4 block">0{index + 1}</span>
+              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
