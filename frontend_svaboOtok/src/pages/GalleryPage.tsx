@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Lightbox from '../components/Lightbox';
 import { GALLERY_IMAGES } from '../config/images';
 
@@ -61,7 +60,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
   }, [currentPage]);
 
   return (
-    <div className="min-h-screen bg-white" id="top">
+    <div className="min-h-screen bg-amber-50" id="top">
       <Header lang={lang} setLang={setLang} />
 
       {/* Hero bar */}
@@ -69,13 +68,16 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
         <div className="max-w-7xl mx-auto">
           <button
             onClick={() => navigate('/')}
-            className="text-gray-400 hover:text-yellow transition-colors mb-6 flex items-center gap-2 text-sm"
+            className="inline-flex items-center gap-2 px-5 py-2 mb-8 bg-white/10 hover:bg-yellow hover:text-black text-white text-sm font-semibold rounded-full border border-white/20 hover:border-yellow transition-all duration-300"
           >
             ← {t.backHome}
           </button>
           <div className="flex items-center gap-4 mb-3">
             <span className="w-12 h-1 bg-yellow rounded-full" />
             <h1 className="text-5xl font-bold">{t.title}</h1>
+            <span className="ml-2 px-3 py-1 bg-yellow text-black text-xs font-bold rounded-full">
+              {GALLERY_IMAGES.length}
+            </span>
           </div>
           <p className="text-gray-400 text-lg ml-16">{t.subtitle}</p>
           {totalPages > 1 && (
@@ -149,9 +151,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
         )}
       </section>
 
-      <Footer lang={lang} />
-
-      {lightboxIndex !== null && (
+{lightboxIndex !== null && (
         <Lightbox
           images={pageImages}
           index={lightboxIndex}

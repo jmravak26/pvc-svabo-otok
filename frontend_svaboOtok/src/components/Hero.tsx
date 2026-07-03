@@ -8,23 +8,23 @@ interface HeroProps {
 
 const translations = {
   hr: {
-    title: 'PVC Stolarija Švabo Otok',
+    title: 'PVC & ALU Stolarija Švabo-Otok',
     slides: [
-      { title: 'Kvalitetna PVC Stolarija', subtitle: 'Vaš partner za prozore i vrata' },
-      { title: 'Moderna Rješenja', subtitle: 'Energetska učinkovitost i dizajn' },
-      { title: 'Profesionalna Ugradnja', subtitle: 'Iskustvo i pouzdanost' },
-      { title: 'Dugotrajnost i Sigurnost', subtitle: 'Otpornost na vremenske uvjete' },
-      { title: 'Individualna Rješenja', subtitle: 'Prilagodba vašim potrebama' }
+      { title: 'PVC Prozori i Vrata', subtitle: 'Izvrsna toplinska i zvučna izolacija po mjeri' },
+      { title: 'ALU Stolarija', subtitle: 'Moderan dizajn i vrhunska čvrstina' },
+      { title: 'Rolete i Komarnici', subtitle: 'Dodatna zaštita i funkcionalnost' },
+      { title: 'Profesionalna Montaža', subtitle: 'Od savjetovanja do ugradnje' },
+      { title: 'Rješenja po Mjeri', subtitle: 'Novogradnja i renovacija' }
     ]
   },
   en: {
-    title: 'PVC Joinery Švabo Otok',
+    title: 'PVC & ALU Joinery Švabo-Otok',
     slides: [
-      { title: 'Quality PVC Joinery', subtitle: 'Your partner for windows and doors' },
-      { title: 'Modern Solutions', subtitle: 'Energy efficiency and design' },
-      { title: 'Professional Installation', subtitle: 'Experience and reliability' },
-      { title: 'Durability and Security', subtitle: 'Weather resistant solutions' },
-      { title: 'Custom Solutions', subtitle: 'Tailored to your needs' }
+      { title: 'PVC Windows & Doors', subtitle: 'Excellent thermal and acoustic insulation' },
+      { title: 'ALU Joinery', subtitle: 'Modern design and superior strength' },
+      { title: 'Shutters & Screens', subtitle: 'Extra protection and functionality' },
+      { title: 'Professional Installation', subtitle: 'From consultation to installation' },
+      { title: 'Custom Solutions', subtitle: 'New builds and renovations' }
     ]
   }
 };

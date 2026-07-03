@@ -19,7 +19,7 @@ function Gallery({ lang }: GalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
-    <section id="gallery" className="py-24 bg-white">
+    <section id="gallery" className="py-24 bg-amber-50">
       <div className="px-5 max-w-7xl mx-auto">
         <div className="flex items-center gap-4 mb-12">
           <span className="w-12 h-1 bg-yellow rounded-full" />
