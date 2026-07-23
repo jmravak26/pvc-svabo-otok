@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pvcsvabowebapp.web.app/sitemap.xml
