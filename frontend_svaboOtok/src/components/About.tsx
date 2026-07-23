@@ -8,7 +8,7 @@ interface AboutProps {
 const translations = {
   hr: {
     title: 'O nama',
-    text: 'Švabo-Otok d.o.o. iz Turjaka specijalizirana je tvrtka za prodaju, ugradnju i servis PVC i aluminijske stolarije. Nudimo kompletna rješenja za dom i poslovne objekte — od prozora i vrata do roleta i komarnika — uz besplatno savjetovanje, izradu po mjeri i profesionalnu montažu.',
+    text: 'Švabo-Otok d.o.o. iz Turjaka specijalizirana je tvrtka za prodaju, ugradnju i servis PVC i aluminijske stolarije. Nudimo kompletna rješenja za dom i poslovne objekte od prozora i vrata do roleta i komarnika uz besplatno savjetovanje, izradu po mjeri i profesionalnu montažu.',
     learnMore: 'Saznaj više',
     close: 'Zatvori',
     icons: [Frame, Layers, Wind, Wrench],
@@ -81,7 +81,7 @@ const translations = {
   },
   en: {
     title: 'About Us',
-    text: 'Švabo-Otok d.o.o. from Turjaci is a specialised company for the sale, installation and servicing of PVC and aluminium joinery. We offer complete solutions for homes and commercial buildings — from windows and doors to shutters and mosquito nets — with free consultation, custom manufacturing and professional installation.',
+    text: 'Švabo-Otok d.o.o. from Turjaci is a specialised company for the sale, installation and servicing of PVC and aluminium joinery. We offer complete solutions for homes and commercial buildings from windows and doors to shutters and mosquito nets with free consultation, custom manufacturing and professional installation.',
     learnMore: 'Learn more',
     close: 'Close',
     icons: [Frame, Layers, Wind, Wrench],
@@ -189,7 +189,7 @@ function About({ lang }: AboutProps) {
               </span>
               <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">{feature.desc}</p>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                 {t.learnMore} →
               </span>
             </button>

@@ -10,7 +10,7 @@ const translations = {
   hr: {
     contact: 'Kontakt Informacije',
     tagline: 'Vaš pouzdani partner za PVC i ALU stolariju',
-    slogan: 'Od savjetovanja do montaže — sve na jednom mjestu.',
+    slogan: 'Od savjetovanja do montaže - sve na jednom mjestu.',
     hours: 'Radno vrijeme',
     weekdays: 'Pon – Pet',
     rights: 'Sva prava pridržana',
@@ -25,7 +25,7 @@ const translations = {
   en: {
     contact: 'Contact Info',
     tagline: 'Your reliable partner for PVC and ALU joinery',
-    slogan: 'From consultation to installation — all in one place.',
+    slogan: 'From consultation to installation - all in one place.',
     hours: 'Working Hours',
     weekdays: 'Mon – Fri',
     rights: 'All rights reserved',
@@ -68,10 +68,10 @@ function Footer({ lang }: FooterProps) {
   ];
 
   return (
-    <footer id="contact" className="bg-amber-50 text-black relative overflow-hidden">
+    <footer id="contact" className="bg-black text-white relative overflow-hidden">
       {/* Decorative blurs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-linear-to-tr from-yellow/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-linear-to-tr from-yellow/20 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-linear-to-tr from-yellow/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-linear-to-tr from-yellow/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -80,19 +80,19 @@ function Footer({ lang }: FooterProps) {
           <div className="md:col-span-2 flex flex-col items-center md:items-start">
             <div className="flex items-center gap-4 mb-5 group">
               <img src="/images/logoImages/mainLogo.png" alt="Švabo-Otok Logo" className="h-12 rounded-full group-hover:scale-105 transition-all duration-300" />
-              <span className="text-2xl font-bold text-black">Švabo-Otok d.o.o.</span>
+              <span className="text-2xl font-bold text-white">Švabo-Otok d.o.o.</span>
             </div>
-            <p className="text-xl font-bold text-black mb-1 text-center md:text-left">{t.tagline}</p>
-            <p className="text-gray-500 text-sm mb-6 text-center md:text-left">{t.slogan}</p>
+            <p className="text-xl font-bold text-white mb-1 text-center md:text-left">{t.tagline}</p>
+            <p className="text-gray-400 text-sm mb-6 text-center md:text-left">{t.slogan}</p>
             {/* Badge icons */}
             <div className="flex gap-3">
-              <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm">
+              <div className="flex items-center gap-2 bg-white/10 border border-white/10 rounded-xl px-3 py-2">
                 <Shield className="w-4 h-4 text-yellow" />
-                <span className="text-xs font-semibold text-gray-700">{lang === 'hr' ? 'Garancija' : 'Warranty'}</span>
+                <span className="text-xs font-semibold text-gray-300">{lang === 'hr' ? 'Garancija' : 'Warranty'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm">
+              <div className="flex items-center gap-2 bg-white/10 border border-white/10 rounded-xl px-3 py-2">
                 <Award className="w-4 h-4 text-yellow" />
-                <span className="text-xs font-semibold text-gray-700">{lang === 'hr' ? '20+ godina iskustva' : '20+ years experience'}</span>
+                <span className="text-xs font-semibold text-gray-300">{lang === 'hr' ? '20+ godina iskustva' : '20+ years experience'}</span>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@ function Footer({ lang }: FooterProps) {
                 <button
                   key={index}
                   onClick={() => smoothScrollTo(link.id)}
-                  className="block text-gray-600 hover:text-black transition-all duration-200 hover:translate-x-2 font-medium"
+                  className="block text-gray-400 hover:text-yellow transition-all duration-200 hover:translate-x-2 font-medium"
                 >
                   {link.label}
                 </button>
@@ -119,22 +119,22 @@ function Footer({ lang }: FooterProps) {
             <div className="space-y-4">
               {contactItems.map(({ icon: Icon, label, value, href, external }) => (
                 <div key={label} className="flex items-start gap-3 w-fit">
-                  <div className="w-8 h-8 bg-white border border-gray-200 rounded-lg flex items-center justify-center shadow-sm shrink-0 mt-0.5">
+                  <div className="w-8 h-8 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-yellow" />
                   </div>
                   <div>
-                    <p className="text-black text-sm font-medium mb-0.5">{label}</p>
+                    <p className="text-gray-300 text-sm font-medium mb-0.5">{label}</p>
                     {href ? (
                       <a
                         href={href}
                         target={external ? '_blank' : undefined}
                         rel={external ? 'noopener noreferrer' : undefined}
-                        className="text-gray-600 hover:text-yellow transition-colors text-sm"
+                        className="text-gray-400 hover:text-yellow transition-colors text-sm underline underline-offset-2 decoration-gray-600 hover:decoration-yellow"
                       >
                         {value}
                       </a>
                     ) : (
-                      <p className="text-gray-600 text-sm">{value}</p>
+                      <p className="text-gray-400 text-sm">{value}</p>
                     )}
                   </div>
                 </div>
@@ -144,7 +144,7 @@ function Footer({ lang }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gray-300 mt-12 pt-8">
+        <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
             <span>&copy; 2024–{new Date().getFullYear()} Švabo-Otok. {t.rights}.</span>
             <div className="flex items-center gap-2 relative">

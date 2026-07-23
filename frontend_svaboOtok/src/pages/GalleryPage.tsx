@@ -2,7 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Lightbox from '../components/Lightbox';
-import { GALLERY_IMAGES } from '../config/images';
+import ScrollToTop from '../components/ScrollToTop';
+import { GALLERY_IMAGES, type GalleryCategory } from '../config/images';
 
 interface GalleryPageProps {
   lang: 'hr' | 'en';
@@ -17,7 +18,8 @@ const translations = {
     backHome: 'Natrag na početnu',
     loadMore: 'Učitaj više',
     previous: 'Prethodna',
-    next: 'Sljedeća'
+    next: 'Sljedeća',
+    all: 'Sve', pvc: 'PVC', alu: 'ALU', rolete: 'Rolete'
   },
   en: {
     title: 'Gallery',
@@ -26,7 +28,8 @@ const translations = {
     backHome: 'Back to Home',
     loadMore: 'Load More',
     previous: 'Previous',
-    next: 'Next'
+    next: 'Next',
+    all: 'All', pvc: 'PVC', alu: 'ALU', rolete: 'Shutters'
   }
 };
 
@@ -39,17 +42,35 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
   const t = translations[lang];
 
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
-  const totalPages = Math.ceil(GALLERY_IMAGES.length / IMAGES_PER_PAGE);
+  const activeFilter = (searchParams.get('category') as GalleryCategory | null) || 'all';
+
+  const filters: { key: GalleryCategory | 'all'; label: string }[] = [
+    { key: 'all', label: t.all },
+    { key: 'pvc', label: t.pvc },
+    { key: 'alu', label: t.alu },
+    { key: 'rolete', label: t.rolete },
+  ];
+
+  const setFilter = (f: GalleryCategory | 'all') =>
+    navigate(f === 'all' ? '/gallery' : `/gallery?category=${f}`);
+
+  const filteredImages = useMemo(
+    () => activeFilter === 'all' ? GALLERY_IMAGES : GALLERY_IMAGES.filter(img => img.category === activeFilter),
+    [activeFilter]
+  );
+
+  const totalPages = Math.ceil(filteredImages.length / IMAGES_PER_PAGE);
   const [displayCount, setDisplayCount] = useState(LOAD_INCREMENT);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const randomizedImages = useMemo(() => {
-    return [...GALLERY_IMAGES].sort(() => Math.random() - 0.5);
-  }, []);
+    return [...filteredImages].sort(() => Math.random() - 0.5);
+  }, [filteredImages]);
 
   const startIndex = (currentPage - 1) * IMAGES_PER_PAGE;
   const pageImages = randomizedImages.slice(startIndex, startIndex + IMAGES_PER_PAGE);
   const visibleImages = pageImages.slice(0, displayCount);
+  const pageSrcs = pageImages.map(i => i.src);
 
   const canLoadMore = displayCount < pageImages.length;
   const isPageFull = displayCount >= IMAGES_PER_PAGE;
@@ -57,7 +78,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
   useEffect(() => {
     setDisplayCount(LOAD_INCREMENT);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage]);
+  }, [currentPage, activeFilter]);
 
   return (
     <div className="min-h-screen bg-amber-50" id="top">
@@ -76,13 +97,28 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
             <span className="w-12 h-1 bg-yellow rounded-full" />
             <h1 className="text-5xl font-bold">{t.title}</h1>
             <span className="ml-2 px-3 py-1 bg-yellow text-black text-xs font-bold rounded-full">
-              {GALLERY_IMAGES.length}
+              {filteredImages.length}
             </span>
           </div>
           <p className="text-gray-400 text-lg ml-16">{t.subtitle}</p>
           {totalPages > 1 && (
             <p className="text-gray-600 text-sm ml-16 mt-1">{t.page} {currentPage} / {totalPages}</p>
           )}
+          <div className="flex gap-2 mt-6 ml-16 flex-wrap">
+            {filters.map(f => (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  activeFilter === f.key
+                    ? 'bg-yellow text-black'
+                    : 'bg-white/10 text-white hover:bg-white/20'
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -96,7 +132,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
               className="relative overflow-hidden rounded-2xl aspect-4/3 bg-gray-100 cursor-zoom-in group"
             >
               <img
-                src={img}
+                src={img.src}
                 alt={`Gallery ${startIndex + index + 1}`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -119,7 +155,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
         {isPageFull && totalPages > 1 && (
           <div className="flex justify-center items-center gap-3 mt-12">
             <button
-              onClick={() => navigate(`/gallery?page=${currentPage - 1}`)}
+              onClick={() => navigate(`/gallery?page=${currentPage - 1}${activeFilter !== 'all' ? `&category=${activeFilter}` : ''}`)}
               disabled={currentPage === 1}
               className="px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-yellow hover:text-black transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
             >
@@ -129,7 +165,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}
-                  onClick={() => navigate(`/gallery?page=${page}`)}
+                  onClick={() => navigate(`/gallery?page=${page}${activeFilter !== 'all' ? `&category=${activeFilter}` : ''}`)}
                   className={`w-10 h-10 rounded-full font-semibold transition-all duration-300 ${
                     page === currentPage
                       ? 'bg-yellow text-black'
@@ -141,7 +177,7 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
               ))}
             </div>
             <button
-              onClick={() => navigate(`/gallery?page=${currentPage + 1}`)}
+              onClick={() => navigate(`/gallery?page=${currentPage + 1}${activeFilter !== 'all' ? `&category=${activeFilter}` : ''}`)}
               disabled={currentPage === totalPages}
               className="px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-yellow hover:text-black transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
             >
@@ -153,13 +189,14 @@ function GalleryPage({ lang, setLang }: GalleryPageProps) {
 
 {lightboxIndex !== null && (
         <Lightbox
-          images={pageImages}
+          images={pageSrcs}
           index={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex(i => i !== null ? (i - 1 + pageImages.length) % pageImages.length : 0)}
-          onNext={() => setLightboxIndex(i => i !== null ? (i + 1) % pageImages.length : 0)}
+          onPrev={() => setLightboxIndex(i => i !== null ? (i - 1 + pageSrcs.length) % pageSrcs.length : 0)}
+          onNext={() => setLightboxIndex(i => i !== null ? (i + 1) % pageSrcs.length : 0)}
         />
       )}
+      <ScrollToTop />
     </div>
   );
 }

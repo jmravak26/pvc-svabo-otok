@@ -1,8 +1,8 @@
-export const smoothScrollTo = (sectionId: string) => {
+export const smoothScrollTo = (sectionId: string, headerHeight?: number) => {
   const element = document.getElementById(sectionId);
   if (element) {
-    const headerHeight = 80;
-    const elementPosition = element.offsetTop - headerHeight;
+    const offset = headerHeight ?? (document.querySelector('header')?.offsetHeight ?? 80);
+    const elementPosition = element.offsetTop - offset;
     const startPosition = window.pageYOffset;
     const distance = elementPosition - startPosition;
     const duration = 1200;

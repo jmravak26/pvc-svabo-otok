@@ -31,6 +31,7 @@ const translations = {
 
 function Hero({ lang }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
   const t = translations[lang];
 
   useEffect(() => {
@@ -38,14 +39,16 @@ function Hero({ lang }: HeroProps) {
       setCurrentSlide((prev) => (prev + 1) % t.slides.length);
     }, 9000);
     return () => clearInterval(timer);
-  }, [t.slides.length]);
+  }, [t.slides.length, resetKey]);
 
   const goToPrevious = () => {
     setCurrentSlide((prev) => (prev - 1 + t.slides.length) % t.slides.length);
+    setResetKey((k) => k + 1);
   };
 
   const goToNext = () => {
     setCurrentSlide((prev) => (prev + 1) % t.slides.length);
+    setResetKey((k) => k + 1);
   };
 
   return (
@@ -91,7 +94,7 @@ function Hero({ lang }: HeroProps) {
             className={`w-3 h-3 rounded-full transition-all ${
               index === currentSlide ? 'bg-yellow scale-110' : 'bg-white/50 hover:bg-white/80'
             }`}
-            onClick={() => setCurrentSlide(index)}
+            onClick={() => { setCurrentSlide(index); setResetKey((k) => k + 1); }}
           />
         ))}
       </div>
