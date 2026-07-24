@@ -65,7 +65,7 @@ function Hero({ lang }: HeroProps) {
             alt={slide.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 md:via-black/10 to-transparent flex flex-col justify-end items-center md:items-start px-8 md:px-14 pb-16 md:pb-12 text-white text-center md:text-left">
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 md:via-black/10 to-transparent flex flex-col justify-end items-center md:items-start px-8 md:px-14 pb-16 md:pb-12 text-white text-center md:text-left">
             <p className="text-yellow font-semibold text-sm md:text-base uppercase tracking-widest mb-2 drop-shadow">{t.title}</p>
             <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg leading-tight">{slide.title}</h2>
             <p className="text-base md:text-lg text-white/80 mt-2 drop-shadow">{slide.subtitle}</p>

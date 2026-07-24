@@ -13,14 +13,14 @@ const translations = {
     home: 'Početna',
     about: 'O nama',
     gallery: 'Galerija',
-    cooperations: 'Suradnje',
+    cooperations: 'Suradnje & Certifikati',
     contact: 'Kontakt'
   },
   en: {
     home: 'Home',
     about: 'About Us',
     gallery: 'Gallery',
-    cooperations: 'Cooperations',
+    cooperations: 'Cooperations & Certificates',
     contact: 'Contact'
   }
 };
@@ -48,8 +48,13 @@ function Header({ lang, setLang }: HeaderProps) {
   }, [isScrolling]);
 
   useEffect(() => {
-    const sections = ['contact-form', 'cooperations', 'gallery', 'about', 'top'];
+    const sections = ['contact', 'credentials', 'cooperations', 'gallery', 'about', 'top'];
     const handleActiveSpy = () => {
+      const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 50;
+      if (scrolledToBottom) {
+        setActiveSection('contact');
+        return;
+      }
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= 100) {
@@ -82,12 +87,14 @@ function Header({ lang, setLang }: HeaderProps) {
     }
   };
 
-  const navBtnClass = (id: string) =>
-    `font-medium transition-colors ${
-      activeSection === id
+  const navBtnClass = (id: string) => {
+    const isActive = id === 'cooperations' ? activeSection === 'cooperations' || activeSection === 'credentials' : activeSection === id;
+    return `font-medium transition-colors ${
+      isActive
         ? scrollProgress > 0.5 ? 'text-white underline underline-offset-4' : 'text-yellow underline underline-offset-4'
         : scrollProgress > 0.5 ? 'hover:text-white' : 'hover:text-yellow'
     }`;
+  };
 
   return (
     <header
@@ -113,7 +120,7 @@ function Header({ lang, setLang }: HeaderProps) {
             <button onClick={() => scrollToSection('about')} className={navBtnClass('about')}>{t.about}</button>
             <button onClick={() => scrollToSection('gallery')} className={navBtnClass('gallery')}>{t.gallery}</button>
             <button onClick={() => scrollToSection('cooperations')} className={navBtnClass('cooperations')}>{t.cooperations}</button>
-            <button onClick={() => scrollToSection('contact-form')} className={navBtnClass('contact-form')}>{t.contact}</button>
+            <button onClick={() => scrollToSection('contact')} className={navBtnClass('contact')}>{t.contact}</button>
           </nav>
 
           {/* Right side: language toggle + mobile hamburger */}
@@ -148,7 +155,7 @@ function Header({ lang, setLang }: HeaderProps) {
             <button onClick={() => scrollToSection('about')} className="text-left px-4 py-3 rounded-lg hover:bg-black/10 font-medium transition-colors">{t.about}</button>
             <button onClick={() => scrollToSection('gallery')} className="text-left px-4 py-3 rounded-lg hover:bg-black/10 font-medium transition-colors">{t.gallery}</button>
             <button onClick={() => scrollToSection('cooperations')} className="text-left px-4 py-3 rounded-lg hover:bg-black/10 font-medium transition-colors">{t.cooperations}</button>
-            <button onClick={() => scrollToSection('contact-form')} className="text-left px-4 py-3 rounded-lg hover:bg-black/10 font-medium transition-colors">{t.contact}</button>
+            <button onClick={() => scrollToSection('contact')} className="text-left px-4 py-3 rounded-lg hover:bg-black/10 font-medium transition-colors">{t.contact}</button>
           </nav>
         )}
       </div>

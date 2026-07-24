@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Heart, Shield, Award } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Heart, Shield, Award, Building2, CreditCard } from 'lucide-react';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
 interface FooterProps {
@@ -8,7 +8,7 @@ interface FooterProps {
 
 const translations = {
   hr: {
-    contact: 'Kontakt Informacije',
+    info: 'Informacije',
     tagline: 'Vaš pouzdani partner za PVC i ALU stolariju',
     slogan: 'Od savjetovanja do montaže - sve na jednom mjestu.',
     hours: 'Radno vrijeme',
@@ -23,7 +23,7 @@ const translations = {
     inCroatia: 'u Hrvatskoj',
   },
   en: {
-    contact: 'Contact Info',
+    info: 'Info',
     tagline: 'Your reliable partner for PVC and ALU joinery',
     slogan: 'From consultation to installation - all in one place.',
     hours: 'Working Hours',
@@ -61,10 +61,51 @@ function Footer({ lang }: FooterProps) {
   ];
 
   const contactItems = [
-    { icon: Mail, label: 'Email', value: 'svabootok1@gmail.com', href: 'mailto:svabootok1@gmail.com', external: false },
-    { icon: Phone, label: lang === 'hr' ? 'Telefon' : 'Phone', value: '+385 98 336 884', href: 'tel:+38598336884', external: false },
-    { icon: MapPin, label: lang === 'hr' ? 'Adresa' : 'Address', value: 'Turjaci 39b, 21230 Sinj', href: 'https://maps.google.com/?q=Turjaci+39b,+21230+Sinj,+Croatia', external: true },
-    { icon: Clock, label: t.hours, value: `${t.weekdays}: 08:00 – 16:00`, href: null, external: false },
+    {
+      icon: Mail,
+      label: 'Email',
+      values: [
+        { text: 'svabootok1@gmail.com', href: 'mailto:svabootok1@gmail.com', external: false },
+        { text: 'nena.svabootok1@gmail.com', href: 'mailto:nena.svabootok1@gmail.com', external: false },
+      ],
+    },
+    {
+      icon: Phone,
+      label: lang === 'hr' ? 'Telefon' : 'Phone',
+      values: [
+        { text: '+385 98 336 884', href: 'tel:+38598336884', external: false },
+        { text: '+385 99 860 0841', href: 'tel:+385998600841', external: false },
+      ],
+    },
+    {
+      icon: MapPin,
+      label: lang === 'hr' ? 'Sjedište' : 'Registered Office',
+      values: [
+        { text: 'Hrvatskih branitelja 18, Otok', href: 'https://maps.google.com/?q=Hrvatskih+Branitelja+18,+Otok,+Croatia', external: true },
+      ],
+    },
+    {
+      icon: MapPin,
+      label: lang === 'hr' ? 'Proizvodni pogon' : 'Production Site',
+      values: [
+        { text: 'Turjaci 39 B', href: 'https://maps.google.com/?q=Turjaci+39b,+21230+Sinj,+Croatia', external: true },
+      ],
+    },
+    {
+      icon: Building2,
+      label: 'OIB',
+      values: [{ text: 'xyz123', href: null, external: false }],
+    },
+    {
+      icon: CreditCard,
+      label: lang === 'hr' ? 'Žiro račun' : 'Bank Account',
+      values: [{ text: 'x1y2z3', href: null, external: false }],
+    },
+    {
+      icon: Clock,
+      label: t.hours,
+      values: [{ text: `${t.weekdays}: 08:00 – 16:00`, href: null, external: false }],
+    },
   ];
 
   return (
@@ -115,26 +156,29 @@ function Footer({ lang }: FooterProps) {
 
           {/* Contact */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="font-bold text-lg mb-6 text-yellow">{t.contact}</h3>
+            <h3 className="font-bold text-lg mb-6 text-yellow">{t.info}</h3>
             <div className="space-y-4">
-              {contactItems.map(({ icon: Icon, label, value, href, external }) => (
-                <div key={label} className="flex items-start gap-3 w-fit">
+              {contactItems.map(({ icon: Icon, label, values }) => (
+                <div key={label} className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-yellow" />
                   </div>
                   <div>
                     <p className="text-gray-300 text-sm font-medium mb-0.5">{label}</p>
-                    {href ? (
-                      <a
-                        href={href}
-                        target={external ? '_blank' : undefined}
-                        rel={external ? 'noopener noreferrer' : undefined}
-                        className="text-gray-400 hover:text-yellow transition-colors text-sm underline underline-offset-2 decoration-gray-600 hover:decoration-yellow"
-                      >
-                        {value}
-                      </a>
-                    ) : (
-                      <p className="text-gray-400 text-sm">{value}</p>
+                    {values.map(({ text, href, external }) =>
+                      href ? (
+                        <a
+                          key={text}
+                          href={href}
+                          target={external ? '_blank' : undefined}
+                          rel={external ? 'noopener noreferrer' : undefined}
+                          className="block text-gray-400 hover:text-yellow transition-colors text-sm underline underline-offset-2 decoration-gray-600 hover:decoration-yellow"
+                        >
+                          {text}
+                        </a>
+                      ) : (
+                        <p key={text} className="text-gray-400 text-sm">{text}</p>
+                      )
                     )}
                   </div>
                 </div>

@@ -3,7 +3,8 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Gallery from '../components/Gallery';
 import Cooperations from '../components/Cooperations';
-import ContactForm from '../components/ContactForm';
+// import ContactForm from '../components/ContactForm'; // TODO: ContactForm - feature coming in later release
+import Credentials from '../components/Credentials';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
@@ -20,7 +21,7 @@ function HomePage({ lang, setLang }: HomePageProps) {
       <About lang={lang} />
       <Gallery lang={lang} />
       <Cooperations lang={lang} />
-      <ContactForm lang={lang} />
+      <Credentials lang={lang} />
       <Footer lang={lang} />
       <ScrollToTop />
     </div>

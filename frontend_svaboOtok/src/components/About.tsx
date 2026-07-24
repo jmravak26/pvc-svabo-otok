@@ -31,13 +31,16 @@ const translations = {
       },
       {
         title: 'ALU Stolarija',
-        desc: 'Aluminijski prozori i vrata, staklene fasade, podizno-klizni sustavi i konstrukcije velikih dimenzija s minimalističkim dizajnom.',
+        desc: 'Aluminijski prozori i vrata, ALU fasade, sjenila, ALU i staklene ograde, podizno-klizni sustavi i konstrukcije velikih dimenzija s minimalističkim dizajnom.',
         details: {
           heading: 'ALU stolarija – moderan dizajn i vrhunska izdržljivost',
           intro: 'Za one koji traže sofisticiran izgled i maksimalnu čvrstoću, aluminijska stolarija je pravi izbor.',
           bullets: [
             'ALU prozore i vrata',
-            'Staklene fasade',
+            'ALU fasade',
+            'Sjenila',
+            'ALU ograde',
+            'Staklene ograde',
             'Klizne i podizno-klizne sustave',
             'Konstrukcije velikih dimenzija',
             'Minimalistički dizajn s tankim profilima',
@@ -104,13 +107,16 @@ const translations = {
       },
       {
         title: 'ALU Joinery',
-        desc: 'Aluminium windows and doors, glass facades, lift-and-slide systems and large-format constructions with minimalist design.',
+        desc: 'Aluminium windows and doors, ALU facades, shades, ALU and glass fences, lift-and-slide systems and large-format constructions with minimalist design.',
         details: {
           heading: 'ALU joinery – modern design and superior durability',
           intro: 'For those seeking a sophisticated look and maximum strength, aluminium joinery is the right choice.',
           bullets: [
             'ALU windows and doors',
-            'Glass facades',
+            'ALU facades',
+            'Shades',
+            'ALU fences',
+            'Glass fences',
             'Sliding and lift-and-slide systems',
             'Large-format constructions',
             'Minimalist design with slim profiles',
